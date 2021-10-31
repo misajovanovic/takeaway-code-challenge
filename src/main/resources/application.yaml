@@ -1,0 +1,24 @@
+eurekaIp: 127.0.0.1
+
+spring:
+  application:
+    name: eureka-server
+
+server:
+  port: 1111
+
+eureka:
+  instance:
+    hostname: ${eurekaIp}
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  server:
+    enable-self-preservation: false
+
+logging:
+  file: logs/eureka-server.log
+  level:
+    ROOT: INFO

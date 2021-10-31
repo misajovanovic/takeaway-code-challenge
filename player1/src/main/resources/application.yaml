@@ -1,0 +1,36 @@
+eurekaHostIp: 127.0.0.1
+eurekaPort: 1111
+serverPort: 8081
+serverHostIp: 127.0.0.1
+
+spring:
+  application:
+    name: player-1
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://${eurekaHostIp}:${eurekaPort}/eureka}
+  instance:
+    hostname: ${serverHostIp}
+    statusPageUrlPath: /info
+    healthCheckUrlPath: /health
+server:
+  port: ${serverPort}
+  hostIp: http://${serverHostIp}
+  error:
+    include-stacktrace: always
+  servlet:
+    context-path: /api
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 60000
+        readTimeout: 10000
+
+logging:
+  file:
+    name: logs/users-api-gateway.log
+  level:
+    ROOT: INFO
